@@ -11,19 +11,16 @@ function nextSequence(){
 
     $('#'+randomChosenColor).fadeOut(100).fadeIn(100);
 
-    var fileName='./sounds/'+randomChosenColor+'.mp3';
-    var sound = new Audio(fileName);
-    sound.play();
-
+    playSound(randomChosenColor)
 }
 
 var userChosenColor=$('.btn').click(colorChosen)
 
 
-
 function colorChosen(event){
     var color=this.id;
     userClickedPattern.push(color);
+    playSound(color)
 
 }
 
