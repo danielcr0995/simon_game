@@ -15,7 +15,8 @@ $('.btn').click(colorChosen)
 
 function startGame(){
     if(!start){
-        nextSequence()
+        setTimeout(  nextSequence,300)
+        // nextSequence()
         $("#level-title").text('Level '+level)
         start=true
     }
@@ -32,8 +33,9 @@ function checkAnswer(currentLevel){
         }      
     }else {
         playSound('wrong');
-        animateGameOver()
-
+        animateGameOver();
+        startOver();
+        $(document).keydown(startGame);
     };
 }
 
@@ -78,6 +80,13 @@ function animateGameOver(){
     setTimeout(function (){
         $('body').removeClass('game-over')
     },100);
+}
+
+function startOver(){
+    level=0;
+    gamePattern=[];
+    userClickedPattern=[];
+    start=false
 }
 
 
