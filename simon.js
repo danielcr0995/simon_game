@@ -35,7 +35,7 @@ function checkAnswer(currentLevel){
         playSound('wrong');
         animateGameOver();
         startOver();
-        $(document).keydown(startGame);
+        // $(document).keydown(startGame);
     };
 }
 
