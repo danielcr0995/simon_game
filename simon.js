@@ -9,7 +9,9 @@ var level=0
 $(document).keydown(startGame);
  
 
-var userChosenColor=$('.btn').click(colorChosen)
+$('.btn').click(colorChosen)
+
+
 
 function startGame(){
     if(!start){
@@ -18,15 +20,26 @@ function startGame(){
         start=true
     }
 }
+
+function checkAnswer(currentLevel){
+    if (gamePattern[currentLevel]===userClickedPattern[currentLevel]){
+        // console.log('success');  
+        if(gamePattern.length===userClickedPattern.length){
+            setTimeout(function (){
+                nextSequence();
+                $("#level-title").text('Level '+level)
+            },1000);
+            userClickedPattern=[];
+        }      
+    }else console.log('wrong');
+}
+
 function nextSequence(){
-    var randomNumber=Math.floor(Math.random()*4);
-    
+    level++;
+    var randomNumber=Math.floor(Math.random()*4);    
     var randomChosenColor=buttonColors[randomNumber];
-
     gamePattern.push(randomChosenColor);
-
     $('#'+randomChosenColor).fadeOut(100).fadeIn(100);
-
     playSound(randomChosenColor);
     animatePress(randomChosenColor);
 }
@@ -37,6 +50,7 @@ function colorChosen(event){
     userClickedPattern.push(color);
     playSound(color)
     animatePress(color)
+    checkAnswer(level)
 
 }
 
